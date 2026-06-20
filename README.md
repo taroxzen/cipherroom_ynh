@@ -14,7 +14,7 @@ CipherRoom is a secure, end-to-end encrypted (E2EE) chat application with a Mate
 ## Installation
 To install this app on your YunoHost server, run:
 ```bash
-sudo yunohost app install https://github.com/tanerb/cipherroom_ynh
+sudo yunohost app install https://github.com/taroxzen/cipherroom_ynh
 ```
 
 ## Management
@@ -38,5 +38,5 @@ CipherRoom, Material 3 koyu temalı arayüze sahip, uçtan uca şifreli (E2EE) g
 ## Kurulum
 Bu uygulamayı YunoHost sunucunuza kurmak için:
 ```bash
-sudo yunohost app install https://github.com/tanerb/cipherroom_ynh
+sudo yunohost app install https://github.com/taroxzen/cipherroom_ynh
 ```
