@@ -1,0 +1,11 @@
+#!/bin/bash
+source /usr/share/yunohost/helpers
+
+set -e
+
+app=$YNH_APP_INSTANCE_NAME
+
+# Remove configuration files
+ynh_remove_nginx_config
+ynh_remove_fpm_config
+

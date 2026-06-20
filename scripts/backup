@@ -1,0 +1,9 @@
+#!/bin/bash
+source /usr/share/yunohost/helpers
+
+set -e
+
+# Backup installation and data directories
+ynh_backup "$install_dir"
+ynh_backup "$data_dir"
+

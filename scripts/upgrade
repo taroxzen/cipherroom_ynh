@@ -1,0 +1,40 @@
+#!/bin/bash
+source /usr/share/yunohost/helpers
+
+set -e
+
+app=$YNH_APP_INSTANCE_NAME
+
+# Copy new sources over
+cp -a ../sources/index.html "$install_dir/"
+cp -a ../sources/style.css "$install_dir/"
+cp -a ../sources/app.php "$install_dir/"
+cp -a ../sources/app.src.js "$install_dir/"
+cp -a ../sources/api.php "$install_dir/"
+cp -a ../sources/test_db.php "$install_dir/"
+
+# Setup permissions for install directory
+chown -R "$app:www-data" "$install_dir"
+chmod -R 755 "$install_dir"
+
+# Regenerate config.php
+cat <<EOF > "$install_dir/config.php"
+<?php
+\$CUSTOM_DB_FILE = '$data_dir/chat.db';
+EOF
+chown "$app:www-data" "$install_dir/config.php"
+chmod 644 "$install_dir/config.php"
+
+# Keep database permissions
+chown -R "$app:www-data" "$data_dir"
+chmod 770 "$data_dir"
+
+if [ -f "$data_dir/chat.db" ]; then
+    chown "$app:www-data" "$data_dir/chat.db"
+    chmod 660 "$data_dir/chat.db"
+fi
+
+# Reconfigure nginx and php-fpm
+ynh_add_nginx_config
+ynh_add_fpm_config
+

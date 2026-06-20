@@ -1,0 +1,50 @@
+#!/bin/bash
+source /usr/share/yunohost/helpers
+
+set -e
+
+# Retrieve settings
+app=$YNH_APP_INSTANCE_NAME
+domain=$YNH_APP_ARG_DOMAIN
+path=$YNH_APP_ARG_PATH
+
+# 1. Save settings
+ynh_app_setting_set --key=domain --value="$domain"
+ynh_app_setting_set --key=path --value="$path"
+
+# 2. Copy sources to install directory
+cp -a ../sources/index.html "$install_dir/"
+cp -a ../sources/style.css "$install_dir/"
+cp -a ../sources/app.php "$install_dir/"
+cp -a ../sources/app.src.js "$install_dir/"
+cp -a ../sources/api.php "$install_dir/"
+cp -a ../sources/test_db.php "$install_dir/"
+
+# 3. Setup permissions for install directory
+chown -R "$app:www-data" "$install_dir"
+chmod -R 755 "$install_dir"
+
+# 4. Generate config.php for database path
+cat <<EOF > "$install_dir/config.php"
+<?php
+\$CUSTOM_DB_FILE = '$data_dir/chat.db';
+EOF
+chown "$app:www-data" "$install_dir/config.php"
+chmod 644 "$install_dir/config.php"
+
+# 5. Setup data directory permissions
+chown -R "$app:www-data" "$data_dir"
+chmod 770 "$data_dir"
+
+# 6. Create SQLite database file and set permissions
+touch "$data_dir/chat.db"
+chown "$app:www-data" "$data_dir/chat.db"
+chmod 660 "$data_dir/chat.db"
+
+# 7. Integrate configurations
+ynh_add_nginx_config
+ynh_add_fpm_config
+
+# Finish
+ynh_print_info --message="CipherRoom has been successfully installed!"
+

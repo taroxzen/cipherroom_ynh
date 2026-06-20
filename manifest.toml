@@ -1,0 +1,61 @@
+# YunoHost Application Manifest (Format 2)
+
+packaging_format = 2
+id = "cipherroom"
+name = "CipherRoom"
+version = "1.0~ynh1"
+maintainers = [
+    "@tanerb"
+]
+
+[upstream]
+license = "MIT"
+website = "https://github.com/tanerb/cipherroom_ynh"
+code = "https://github.com/tanerb/cipherroom_ynh"
+
+[description]
+en = "End-to-end encrypted (E2EE) secure chat rooms."
+tr = "Uçtan uca şifreli (E2EE) ve güvenli sohbet odaları."
+
+[integration]
+yunohost = ">= 4.3"
+architectures = "all"
+helpers_version = "2.0"
+multi_instance = true
+disk = "10M"
+
+[integration.ram]
+build = "10M"
+runtime = "10M"
+
+[resources]
+
+[resources.system_user]
+
+[resources.install_dir]
+
+[resources.data_dir]
+
+[resources.permissions]
+main.url = "/"
+main.allowed = "all_users"
+
+[resources.apt]
+packages = [
+    "php-fpm",
+    "php-sqlite3"
+]
+
+[install]
+
+[install.domain]
+type = "domain"
+ask.en = "Choose a domain for CipherRoom"
+ask.tr = "CipherRoom için bir alan adı seçin"
+
+[install.path]
+type = "path"
+ask.en = "Choose a path for CipherRoom"
+ask.tr = "CipherRoom için bir dizin seçin"
+default = "/chat"
+

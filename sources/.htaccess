@@ -1,0 +1,13 @@
+# SQLite veritabanı ve orijinal JavaScript kaynak koduna doğrudan tarayıcı erişimini engelle (Apache için)
+<FilesMatch "^(chat\.db|app\.src\.js)$">
+    <IfModule authz_core_module>
+        Require all denied
+    </IfModule>
+    <IfModule !authz_core_module>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Dizin listelemeyi kapat
+Options -Indexes

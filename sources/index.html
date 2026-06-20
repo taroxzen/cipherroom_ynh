@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CipherRoom // Uçtan Uca Şifreli Sohbet</title>
+    <meta name="description" content="Material 3 tasarımlı, uçtan uca şifreli (E2EE) güvenli ve gizli sohbet odaları. Mesajlarınız sunucuya şifrelenerek gönderilir ve asla okunamaz.">
+    <!-- Google Fonts & Material Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="m3-theme dark-mode">
+
+    <!-- Arka plan gradyanı ve efektler -->
+    <div class="bg-glow"></div>
+
+    <main class="app-container">
+        <!-- 1. GİRİŞ EKRANI (LOGIN / JOIN ROOM) -->
+        <section id="login-screen" class="card active">
+            <header class="login-header">
+                <div class="logo-area">
+                    <span class="material-symbols-outlined logo-icon">security</span>
+                    <h1>Cipher<span>Room</span></h1>
+                </div>
+                <p class="subtitle">Uçtan Uca Şifreli Güvenli Sohbet</p>
+            </header>
+
+            <form id="login-form" autocomplete="off">
+                <!-- 1. İsim kutucuk -->
+                <div class="input-group">
+                    <span class="material-symbols-outlined input-icon">person</span>
+                    <input type="text" id="username-input" required placeholder=" " minlength="2" maxlength="20">
+                    <label for="username-input">İsim</label>
+                </div>
+
+                <!-- 2. oda şifresi kutucuk -->
+                <div class="input-group">
+                    <span class="material-symbols-outlined input-icon">vpn_key</span>
+                    <input type="password" id="key-input" required placeholder=" " minlength="4">
+                    <label for="key-input">Oda Şifresi</label>
+                    <button type="button" id="toggle-password" class="icon-btn-inline">
+                        <span class="material-symbols-outlined">visibility</span>
+                    </button>
+                </div>
+
+
+
+                <!-- 4. bağlan buton -->
+                <button type="submit" id="join-btn" class="btn btn-primary btn-full">
+                    <span class="btn-text">Bağlan</span>
+                    <span class="material-symbols-outlined btn-icon">login</span>
+                </button>
+            </form>
+        </section>
+
+        <!-- 2. CHAT EKRANI -->
+        <section id="chat-screen" class="card">
+            <!-- Chat Üst Bilgi Barı -->
+            <header class="chat-header">
+                <div class="room-info">
+                    <div class="status-indicator-container">
+                        <span class="status-dot online"></span>
+                    </div>
+                    <div class="room-details">
+                        <h2 id="active-room-name">Oda Adı</h2>
+                        <span id="active-room-hash" class="room-hash">Hash: -</span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button id="share-link-btn" class="btn btn-tonal" title="Güvenli Davet Linki Kopyala">
+                        <span class="material-symbols-outlined">share</span>
+                        <span class="btn-text-responsive">Davet Linki</span>
+                    </button>
+                    <button id="leave-room-btn" class="btn btn-danger" title="Odadan Çık">
+                        <span class="material-symbols-outlined">logout</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Mesaj Listesi -->
+            <div id="messages-container" class="messages-area">
+                <!-- Örnek yüklenme animasyonu veya sistem mesajı -->
+                <div class="system-message">
+                    <span class="material-symbols-outlined message-lock-icon">lock</span>
+                    <p>Uçtan uca şifreli oda oluşturuldu. Şifreleme anahtarı yerel bellekte saklanıyor.</p>
+                </div>
+            </div>
+
+            <!-- Mesaj Yazma Paneli -->
+            <footer class="chat-footer">
+                <form id="message-form" class="message-input-bar">
+                    <div class="message-input-wrapper">
+                        <input type="text" id="message-input" placeholder="Güvenli mesaj yazın..." autocomplete="off" required>
+                        <div class="encryption-status" title="Bu mesaj uçtan uca şifrelenecek">
+                            <span class="material-symbols-outlined">verified_user</span>
+                        </div>
+                    </div>
+                    <button type="submit" id="send-btn" class="btn-fab btn-primary-fab" title="Gönder">
+                        <span class="material-symbols-outlined">send</span>
+                    </button>
+                </form>
+            </footer>
+        </section>
+    </main>
+
+    <!-- Bildirim Balonu -->
+    <div id="toast" class="toast">
+        <span id="toast-icon" class="material-symbols-outlined">info</span>
+        <span id="toast-text">Bildirim mesajı</span>
+    </div>
+
+    <!-- Korunan Dinamik Uygulama Motoru -->
+    <script src="app.php"></script>
+</body>
+</html>
